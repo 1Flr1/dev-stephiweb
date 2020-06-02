@@ -52,7 +52,12 @@ class OffreController extends Controller
      */
     public function show($id)
     {
-        //
+        $user=auth()->user();
+        $offres=$user->offre($id);
+        return view('offres_user', [
+            'user' => $user,
+            'offres' => $offres,
+        ], compact('user'));
     }
 
     /**

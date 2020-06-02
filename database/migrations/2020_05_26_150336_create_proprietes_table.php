@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Proprietes extends Migration
+class CreateProprietesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,6 +16,7 @@ class Proprietes extends Migration
         //
         Schema::create('proprietes',function(Blueprint $table){
             $table->id();
+            $table->integer('user_id');
             $table->string('type');
             $table->double('surface');
             $table->double('prix');
@@ -27,6 +28,11 @@ class Proprietes extends Migration
             $table->integer('jardin');
             $table->integer('garages');
             $table->string('description');
+            $table->string('updated_at');
+            $table->string('created_at');
+            
+            
+            
         });
     }
 

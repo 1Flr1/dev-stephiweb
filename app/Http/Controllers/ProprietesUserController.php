@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Propriete;
 
 use Illuminate\Http\Request;
-use App\Propriete;
-use App\User;
-class ProprieteController extends Controller
+
+class ProprietesUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,13 @@ class ProprieteController extends Controller
      */
     public function index()
     {
-        $proprietes=Propriete::all();
+        $user_id=auth()->id();
+        $proprietes_user=Propriete::all()->where('user_id', $user_id);
         
-        
-        return view('proprietes.index', compact('proprietes'));
+        return view('proprietes.proprietes_user',[
+            
+
+        ], compact('proprietes_user'));
     }
 
     /**
@@ -27,7 +30,7 @@ class ProprieteController extends Controller
      */
     public function create()
     {
-        return view('proprietes.create');
+        //
     }
 
     /**
@@ -38,27 +41,7 @@ class ProprieteController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'content'=>'required'
-        // ]);
-
-        $propriete = new Propriete([
-            'user_id'=>auth()->id(),
-            'type'=>$request->get('type'),
-            'surface'=>$request->get('surface'),
-            'prix'=>$request->get('prix'),
-            'adresse'=>$request->get('adresse'),
-            'chambres'=>$request->get('chambres'),
-            'salles_de_bains'=>$request->get('salles_de_bains'),
-            'balcons'=>$request->get('balcons'),
-            'piscines'=>$request->get('piscines'),
-            'jardin'=>$request->get('jardin'),
-            'garages'=>$request->get('garages'),
-            'description'=>$request->get('description'),
-        ]);
-        $propriete->save();
-
-        return redirect('/proprietes');
+        //
     }
 
     /**
@@ -69,12 +52,7 @@ class ProprieteController extends Controller
      */
     public function show($id)
     {
-        $propriete=Propriete::find($id);
-        
-        return view('proprietes.show',[
-            'propriete'=>$propriete,
-
-        ], compact('propriete'));
+        //
     }
 
     /**
@@ -108,10 +86,6 @@ class ProprieteController extends Controller
      */
     public function destroy($id)
     {
-        $propriete=Propriete::find($id);
-        $propriete->delete();
-        return redirect('/proprietes');
+        //
     }
-
-    
 }
